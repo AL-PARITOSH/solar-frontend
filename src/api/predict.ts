@@ -6,6 +6,7 @@ export interface PredictionResponse {
   p_snow: number;
   dust_level: "Low" | "Medium" | "Heavy" | "None";
   snow_level: "Low" | "Medium" | "Heavy" | "None";
+  annotated_image?: string;
 }
 
 export async function predictSolarCondition(file: File): Promise<PredictionResponse> {
