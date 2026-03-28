@@ -1,0 +1,11 @@
+src/api/predict.ts(11,45): error TS6133: 'file' is declared but its value is never read.
+src/App.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/App.tsx(8,33): error TS1484: 'PredictionResponse' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/Footer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Footer.tsx(2,10): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/components/Footer.tsx(2,18): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.
+src/components/Hero.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ModelInfo.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Navbar.tsx(2,15): error TS6133: 'Leaf' is declared but its value is never read.
+src/components/ResultsCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/UploadSection.tsx(3,1): error TS6192: All imports in import declaration are unused.
