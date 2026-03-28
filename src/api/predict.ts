@@ -1,5 +1,5 @@
 export interface PredictionResponse {
-  condition: "Clean" | "Dusty" | "Snow";
+  condition: "Clean" | "Dusty" | "Dust" | "Snow";
   condition_confidence: number;
   p_clean: number;
   p_dust: number;

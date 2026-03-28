@@ -48,7 +48,7 @@ export default function ResultsCard({ data }: { data: PredictionResponse }) {
             <p className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Primary Condition</p>
             <div className="flex items-center gap-3">
               {data.condition === 'Clean' && <CheckCircle2 className="w-8 h-8 text-solar-accent" />}
-              {data.condition === 'Dusty' && <AlertTriangle className="w-8 h-8 text-orange-500" />}
+              {(data.condition === 'Dusty' || data.condition === 'Dust') && <AlertTriangle className="w-8 h-8 text-orange-500" />}
               {data.condition === 'Snow' && <Snowflake className="w-8 h-8 text-blue-300" />}
               <span className="text-3xl font-extrabold text-white">{data.condition}</span>
             </div>
@@ -81,7 +81,7 @@ export default function ResultsCard({ data }: { data: PredictionResponse }) {
 
           <div className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-300">Dusty</span>
+              <span className="text-slate-300">Dust & Dirt</span>
               <span className="text-slate-300">{(data.p_dust * 100).toFixed(1)}%</span>
             </div>
             <div className="h-2 w-full bg-solar-900 rounded-full overflow-hidden">
@@ -114,7 +114,7 @@ export default function ResultsCard({ data }: { data: PredictionResponse }) {
           <div>
             <p className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3">Severity Level Detected</p>
             <div className="flex gap-4">
-              {data.condition === 'Dusty' && (
+              {(data.condition === 'Dusty' || data.condition === 'Dust') && (
                 <div className={`px-4 py-2 rounded-lg border font-semibold ${getSeverityColor(data.dust_level)}`}>
                   Dust: {data.dust_level}
                 </div>
