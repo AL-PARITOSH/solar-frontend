@@ -16,7 +16,7 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
   const handleFile = (selectedFile: File) => {
     setError(null);
     if (!selectedFile.type.startsWith('image/')) {
-      setError('Please upload a valid image file (JPG, PNG).');
+      setError('Please upload a valid image file. We will convert it automatically if needed.');
       return;
     }
     setFile(selectedFile);
