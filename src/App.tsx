@@ -43,14 +43,14 @@ function App() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {/* Upload Area */}
-            <div className="h-[600px]">
+            <div className="min-h-[600px] flex flex-col">
               <UploadSection onAnalyze={handleAnalyze} isLoading={isLoading} />
             </div>
 
             {/* Results Area */}
-            <div className="h-[600px]">
+            <div className="min-h-[600px] flex flex-col">
               {error && (
                 <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 mb-6 flex items-start gap-3">
                   <span className="font-bold">Error:</span> {error}
