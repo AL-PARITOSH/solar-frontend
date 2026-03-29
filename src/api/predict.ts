@@ -65,7 +65,20 @@ export async function predictSolarCondition(file: File): Promise<PredictionRespo
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to get prediction from server: ${response.status} ${response.statusText}`);
+    let errorMessage = `Failed to get prediction from server: ${response.status} ${response.statusText}`;
+    try {
+      const errorData = await response.json();
+      if (errorData && errorData.detail) {
+        if (typeof errorData.detail === "string") {
+          errorMessage = errorData.detail;
+        } else if (Array.isArray(errorData.detail)) {
+          errorMessage = errorData.detail[0].msg || JSON.stringify(errorData.detail);
+        }
+      }
+    } catch (e) {
+      // Ignore JSON parse errors and keep the original failure response text
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();
