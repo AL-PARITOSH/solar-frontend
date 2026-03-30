@@ -73,8 +73,14 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
           <div className="w-16 h-16 bg-solar-900 rounded-full flex items-center justify-center mb-4 shadow-inner">
             <UploadCloud className={`w-8 h-8 ${isDragging ? 'text-solar-accent' : 'text-slate-400'}`} />
           </div>
-          <p className="text-lg font-medium text-slate-200 mb-2">Drag & drop your panel image</p>
-          <p className="text-sm text-slate-400">or click to browse files</p>
+          <p className="text-lg font-medium text-slate-200 mb-1">Drag & drop your panel image</p>
+          <p className="text-sm text-slate-400 mb-4">or click to browse files</p>
+          
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2 mt-2">
+            <p className="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-1">Important Note</p>
+            <p className="text-sm text-amber-200/80">Please insert solar panel images only for accurate analysis.</p>
+          </div>
+          
           {error && <p className="text-red-400 text-sm mt-4 font-medium">{error}</p>}
         </div>
       ) : (

@@ -39,7 +39,7 @@ function App() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Try the Detector</h2>
             <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-              Upload an image of a solar panel to instantly see prediction results from the YOLOv8 and CNN models.
+              Upload an image of a solar panel for analysis. Please ensure you upload <strong>solar panel images only</strong> to get accurate results.
             </p>
           </div>
 
