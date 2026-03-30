@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { UploadCloud, Image as ImageIcon, X, Loader2 } from 'lucide-react';
+import { UploadCloud, Image as ImageIcon, X, Loader2, Camera } from 'lucide-react';
 
 interface UploadSectionProps {
   onAnalyze: (file: File) => Promise<void>;
@@ -12,6 +12,7 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (selectedFile: File) => {
     setError(null);
@@ -48,6 +49,7 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
     setPreview(null);
     setError(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
   };
 
   return (
@@ -61,27 +63,37 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
       <h3 className="text-2xl font-bold text-white mb-6">Upload Image</h3>
       
       {!file ? (
-        <div
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-          className={`relative border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all flex-grow
-            ${isDragging ? 'border-solar-accent bg-solar-accent/5 scale-[1.02]' : 'border-slate-600 hover:border-slate-500 hover:bg-slate-700/30'}
-          `}
-        >
-          <div className="w-16 h-16 bg-solar-900 rounded-full flex items-center justify-center mb-4 shadow-inner">
-            <UploadCloud className={`w-8 h-8 ${isDragging ? 'text-solar-accent' : 'text-slate-400'}`} />
+        <div className="flex flex-col flex-grow gap-4">
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+            className={`relative border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all flex-grow
+              ${isDragging ? 'border-solar-accent bg-solar-accent/5 scale-[1.02]' : 'border-slate-600 hover:border-slate-500 hover:bg-slate-700/30'}
+            `}
+          >
+            <div className="w-16 h-16 bg-solar-900 rounded-full flex items-center justify-center mb-4 shadow-inner">
+              <UploadCloud className={`w-8 h-8 ${isDragging ? 'text-solar-accent' : 'text-slate-400'}`} />
+            </div>
+            <p className="text-lg font-medium text-slate-200 mb-1">Drag & drop your panel image</p>
+            <p className="text-sm text-slate-400 mb-4">or click to browse files</p>
+            
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2 mt-2">
+              <p className="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-1">Important Note</p>
+              <p className="text-sm text-amber-200/80">Please insert solar panel images only for accurate analysis.</p>
+            </div>
+            
+            {error && <p className="text-red-400 text-sm mt-4 font-medium">{error}</p>}
           </div>
-          <p className="text-lg font-medium text-slate-200 mb-1">Drag & drop your panel image</p>
-          <p className="text-sm text-slate-400 mb-4">or click to browse files</p>
-          
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2 mt-2">
-            <p className="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-1">Important Note</p>
-            <p className="text-sm text-amber-200/80">Please insert solar panel images only for accurate analysis.</p>
-          </div>
-          
-          {error && <p className="text-red-400 text-sm mt-4 font-medium">{error}</p>}
+
+          <button
+            onClick={() => cameraInputRef.current?.click()}
+            className="lg:hidden w-full py-4 bg-solar-900/50 border border-slate-600 rounded-xl font-bold text-white flex items-center justify-center gap-3 hover:bg-slate-700 transition-colors shadow-lg shadow-black/20"
+          >
+            <Camera className="w-6 h-6 text-solar-accent" />
+            Take Photo with Camera
+          </button>
         </div>
       ) : (
         <div className="flex flex-col flex-grow">
@@ -131,6 +143,15 @@ export default function UploadSection({ onAnalyze, isLoading }: UploadSectionPro
         ref={fileInputRef} 
         onChange={(e) => e.target.files && handleFile(e.target.files[0])} 
         accept="image/*" 
+        className="hidden" 
+      />
+
+      <input 
+        type="file" 
+        ref={cameraInputRef} 
+        onChange={(e) => e.target.files && handleFile(e.target.files[0])} 
+        accept="image/*" 
+        capture="environment"
         className="hidden" 
       />
     </div>
